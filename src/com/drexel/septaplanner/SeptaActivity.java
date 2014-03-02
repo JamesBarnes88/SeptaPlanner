@@ -1,21 +1,22 @@
-package com.example.septaplanneralpha;
+package com.drexel.septaplanner;
 
-import android.os.Bundle;
+
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 
-public class RecentTripsActivity extends Activity {
+public class SeptaActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_recent_trips);
+		setContentView(R.layout.activity_septa);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.recent_trips, menu);
+		getMenuInflater().inflate(R.menu.septa, menu);
 		return true;
 	}
 

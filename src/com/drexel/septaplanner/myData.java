@@ -8,17 +8,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class myData {
 
 	//http connection using url stream and reading in char by char, might be slow.
-	public static JsonObject getJson(String URL) {
-		JsonObject json;
+	public static JsonElement getJson(String URL) {
+		JsonElement json;
 
 		try {
-			URL url = new URL(URL);
 
 			BufferedReader bf = new BufferedReader(new InputStreamReader(
 					getHttpConnection(URL)));
@@ -31,7 +30,7 @@ public class myData {
 			}
 			// input line is now the full json response
 			bf.close();
-			json = (JsonObject) new JsonParser().parse(input);
+			json = (JsonElement) new JsonParser().parse(input);
 			return json;
 
 		} catch (IOException e) {

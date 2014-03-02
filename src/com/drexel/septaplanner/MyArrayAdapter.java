@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MyArrayAdapter extends ArrayAdapter<Forecast> {
+public class MyArrayAdapter extends ArrayAdapter<septaTrain> {
 
 	private Context context;
 	private int resources;
@@ -21,15 +21,24 @@ public class MyArrayAdapter extends ArrayAdapter<Forecast> {
 		Log.d(tag, "adapter created");
 	}
 
-
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View itemView = inflater.inflate(resources, parent, false);
-		TextView titleView = (TextView) itemView.findViewById(R.id.title);
-		TextView sumView = (TextView) itemView.findViewById(R.id.summary);
-		titleView.setText(super.getItem(position).getTitle());
-		sumView.setText(super.getItem(position).getFctext());
+		//get views
+		TextView originView = (TextView) itemView.findViewById(R.id.origin);
+		TextView destView = (TextView) itemView.findViewById(R.id.dest);
+		TextView departView = (TextView) itemView.findViewById(R.id.depart);
+		TextView arriveView = (TextView) itemView.findViewById(R.id.arrive);
+		TextView trainView = (TextView) itemView.findViewById(R.id.train);
+		
+		septaTrain sTrain= super.getItem(position);
+		//init views
+		originView.setText(sTrain.getOrigin_line());
+		destView.setText(sTrain.getDestination());
+		departView.setText(sTrain.getDepart());
+		arriveView.setText(sTrain.getArrive());
+		trainView.setText(sTrain.getTrainNum());
 
 		return itemView;
 	}

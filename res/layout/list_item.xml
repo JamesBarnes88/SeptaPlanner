@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/origin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="from"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="title"
-            android:textSize="20sp" />
+    <TextView
+        android:id="@+id/train"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/origin"
+        android:paddingRight="5dp"
+        android:text="#train"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="summary" />
-        
-    </LinearLayout>
+    <TextView
+        android:id="@+id/dest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/origin"
+        android:layout_toRightOf="@id/train"
+        android:text="dest"
+        android:textSize="16sp" />
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:layout_weight="2"
-        android:contentDescription="image" />
+    <TextView
+        android:id="@+id/depart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="depart"
+        android:textSize="20sp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/arrive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/depart"
+        android:text="arrive"
+        android:textSize="20sp" />
+
+</RelativeLayout>
