@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		Button mapbutton= (Button) findViewById(R.id.button_map);
 		
 		//listview stuff
-		adapter = new MyArrayAdapter(this, R.layout.list_item);
+		adapter = new MyArrayAdapter(this, R.layout.list_item_trips);
 		lv.setAdapter(adapter);
 		adapter.setNotifyOnChange(true);
 

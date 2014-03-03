@@ -8,28 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RecentTripsActivity" >
 
-    <Button
-        android:id="@+id/buttonTrip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter" />
-
-    <Button
-        android:id="@+id/buttonSaved"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter" />
-
-    <Button
-        android:id="@+id/buttonRecent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter" />
-
-    <Button
-        android:id="@+id/buttonSepta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter" />
+  <ListView android:id="@+id/list_recent_trips"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 
 </RelativeLayout>
