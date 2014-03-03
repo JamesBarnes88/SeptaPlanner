@@ -6,27 +6,54 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/list_item_fromstation"
+    <LinearLayout
+        android:id="@+id/listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chelten Avenue" />
+        android:layout_toRightOf="@id/imageView1"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/list_item_deststation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="30th Street Station" />
+        <TextView
+            android:id="@+id/list_item_fromstation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="From: Chelten Avenue" />
 
-    <TextView
-        android:id="@+id/list_item_fromstation"
+        <TextView
+            android:id="@+id/list_item_deststation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="To: 30th Street Station" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/listview2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chelten Avenue" />
+        android:layout_alignParentRight="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/list_item_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Time Left:" />
+
+        <TextView
+            android:id="@+id/list_item_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="8 min" />
+    </LinearLayout>
 
 </RelativeLayout>
