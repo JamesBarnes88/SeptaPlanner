@@ -13,16 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#c0c0c0"
+        android:padding="5dp"
         android:text="Method of travel:" />
 
     <Spinner
         android:id="@+id/spin_travelmethod"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:entries="@array/array_travel_method" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#c0c0c0"
+        android:padding="5dp"
         android:text="Starting Station:" />
 
     <Spinner
@@ -33,6 +37,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#c0c0c0"
+        android:padding="5dp"
         android:text="Ending Station:" />
 
     <Spinner
@@ -43,18 +49,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#c0c0c0"
+        android:padding="5dp"
         android:text="To to arrive:" />
 
-<!--     this can be changed to put a button with the time on it to open a dialog with the timepicker in it -->
+    <!-- this can be changed to put a button with the time on it to open a dialog with the timepicker in it -->
+
     <TimePicker
         android:id="@+id/timePicker1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_proceed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Go" />

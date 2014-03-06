@@ -34,6 +34,7 @@ public class MyArrayAdapter extends ArrayAdapter<septaTrain> {
 		
 		septaTrain sTrain= super.getItem(position);
 		//init views
+		
 		originView.setText(sTrain.getOrigin_line());
 		destView.setText(sTrain.getDestination());
 		departView.setText(sTrain.getDepart());
