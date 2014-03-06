@@ -10,25 +10,25 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_trip"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="Trip" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_saved"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="Saved Trips" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_recent"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="Recent Trips" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_septa"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="Septa" />
