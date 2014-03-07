@@ -13,6 +13,7 @@ import com.google.gson.JsonParser;
 
 public class myData {
 
+	//hello hello hello
 	//http connection using url stream and reading in char by char, might be slow.
 	public static JsonElement getJson(String URL) {
 		JsonElement json;
