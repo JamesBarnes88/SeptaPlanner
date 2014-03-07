@@ -2,10 +2,14 @@ package com.drexel.septaplanner;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
 
 public class MainActivity extends Activity {
 
@@ -14,11 +18,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+
 		Button buttonTrip = (Button) findViewById(R.id.button_trip);
 		Button buttonSepta = (Button) findViewById(R.id.button_septa);
 		Button buttonRecentTrips = (Button) findViewById(R.id.button_recent);
 		Button buttonSavedTrips = (Button) findViewById(R.id.button_saved);
 
+		
 		buttonTrip.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -51,6 +57,12 @@ public class MainActivity extends Activity {
 				startActivity(i);
 			}
 		});
+		
+		
+		/*buttonTrip.getBackground().setColorFilter(0xFFB22222,PorterDuff.Mode.MULTIPLY);
+		buttonSavedTrips.getBackground().setColorFilter(0xffff4629,PorterDuff.Mode.MULTIPLY);
+		buttonSepta.getBackground().setColorFilter(0xff0000ff,PorterDuff.Mode.MULTIPLY);
+		buttonRecentTrips.getBackground().setColorFilter(0xff0033FF,PorterDuff.Mode.MULTIPLY);*/
 
 	}
 }
