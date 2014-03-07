@@ -17,6 +17,7 @@
         android:layout_height="125dp"
         android:layout_marginBottom="10dp"
         android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:background="@color/dark_red"
         android:text="Trip"/>
         
@@ -27,6 +28,7 @@
         android:layout_height="125dp"
         android:layout_marginBottom="10dp"
         android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:background="@color/bright_red"
         android:text="Saved Trips" />
 
@@ -36,6 +38,7 @@
         android:layout_height="125dp"
         android:layout_marginBottom="10dp"
         android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:background="@color/light_blue"
         android:text="Recent Trips" />
 
@@ -44,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="125dp"
         android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:background="@color/dark_blue"
         android:text="Septa" />
 
