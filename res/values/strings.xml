@@ -6,9 +6,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="spin_prompt">Show entries with score higher than: </string>
     <string name="title_activity_map_fragment">MapFragment</string>
+
     <string-array name="array_travel_method">
-        <item >Walking</item>
-        <item >Driving</item>
+        <item>Walking</item>
+        <item>Driving</item>
     </string-array>
+
+    <string name="title_activity_septa_rr">SeptaRRActivity</string>
 
 </resources>

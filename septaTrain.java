@@ -1,4 +1,4 @@
-package com.drexel.septaplanner;
+package com.drexel.septaviewer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
