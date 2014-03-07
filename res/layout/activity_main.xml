@@ -21,7 +21,6 @@
         android:background="@color/dark_red"
         android:text="Trip"/>
         
-
     <Button
         android:id="@+id/button_saved"
         android:layout_width="match_parent"

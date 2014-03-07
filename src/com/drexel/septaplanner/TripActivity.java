@@ -6,8 +6,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.AssetManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,17 +23,28 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-public class TripActivity extends Activity {
+public class TripActivity extends Activity implements LocationListener {
+
+	// tag for Logcat
+	String tag = "com.drexel.septaplanner.tripActivity";
+
+	// variables for main functionality
 	private int hour = 0;
 	private int min = 0;
 	private String source;
 	private String dest;
-	private String method;
+	private String method;	//method of travel
+	
+	//views
 	private Spinner spinSource;
 	private Spinner spinDest;
 	private Spinner spinTravelMethod;
 	private TimePicker timePicker;
 	private Button buttonProceed;
+
+	// variables for location data
+	private LocationManager locationManager;
+	private String provider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +54,7 @@ public class TripActivity extends Activity {
 		hour = 0;
 		min = 0;
 
-		spinTravelMethod= (Spinner) findViewById(R.id.spin_travelmethod);
+		spinTravelMethod = (Spinner) findViewById(R.id.spin_travelmethod);
 		spinSource = (Spinner) findViewById(R.id.spin_start_station);
 		spinDest = (Spinner) findViewById(R.id.spin_end_station);
 		timePicker = (TimePicker) findViewById(R.id.timePicker1);
@@ -60,22 +77,26 @@ public class TripActivity extends Activity {
 			public void onClick(View v) {
 				hour = timePicker.getCurrentHour();
 				min = timePicker.getCurrentMinute();
-				source= spinSource.getSelectedItem().toString();
-				dest= spinDest.getSelectedItem().toString();
-				method= spinTravelMethod.getSelectedItem().toString();
-				Toast.makeText(
-						TripActivity.this,
-						"Method: "+ method+" souce: "+source+" dest: "+dest+" hour: "+hour+" min: "+min,
+				source = spinSource.getSelectedItem().toString();
+				dest = spinDest.getSelectedItem().toString();
+				method = spinTravelMethod.getSelectedItem().toString();
+				Location location = getLocationData();
+				Trip trip = new Trip(method, source, dest, hour, min, location
+						.getLongitude(), location.getLatitude(), 1);
+
+				Toast.makeText(TripActivity.this, trip.toString(),
 						Toast.LENGTH_LONG).show();
-				
-/*				put code to fetch data here, display loading icon while it 
-				is getting the json data then call for new intent with that 
-				information for the TripDisplayActivity.
-				
-				this could be a AsyncTask or a function that calls the task, 
-				on postExecute you could call the intent, and cancel the 
-				loading view here. */
-				
+
+				/*
+				 * put code to fetch data here, display loading icon while it is
+				 * getting the json data then call for new intent with that
+				 * information for the TripDisplayActivity.
+				 * 
+				 * this could be a AsyncTask or a function that calls the task,
+				 * on postExecute you could call the intent, and cancel the
+				 * loading view here.
+				 */
+
 			}
 		});
 	}
@@ -85,6 +106,23 @@ public class TripActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.trip, menu);
 		return true;
+	}
+
+	public Location getLocationData() {
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		provider = locationManager.getBestProvider(criteria, false);
+		Location location = locationManager.getLastKnownLocation(provider);
+
+		if (location != null) {
+			onLocationChanged(location);
+		} else {
+			Toast.makeText(getApplicationContext(), "Location not found!!! =)",
+					Toast.LENGTH_LONG).show();
+
+			// ask user to enter address
+		}
+		return location;
 	}
 
 	public ArrayList<String> getStations() {
@@ -106,5 +144,34 @@ public class TripActivity extends Activity {
 
 		return stations;
 	}
+
+	/* **********************************************************
+	 * I need to figure out what these do. I have no clue
+	 */
+
+	@Override
+	public void onLocationChanged(Location location) {
+		Log.d(tag, "on location changed ran");
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+
+	}
+	// **********************************************************
 
 }

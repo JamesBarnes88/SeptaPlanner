@@ -13,8 +13,11 @@ import com.google.gson.JsonParser;
 
 public class myData {
 
-	//http connection using url stream and reading in char by char, might be slow.
-	public static JsonElement getJson(String URL) {
+	/** Get Json element from url passed into this method
+	 * @param URL The url to get the json from 
+	 * @return A json element containing the whole json received from the url
+	 */
+	 	public static JsonElement getJson(String URL) {
 		JsonElement json;
 
 		try {
@@ -40,8 +43,12 @@ public class myData {
 		}
 	}
 
-	//http connnection using the way from class
-    // Makes HttpURLConnection and returns InputStream
+	
+    /** returns input stream of this URL connection. This can be used to get files from the specified location
+     * @param urlString url location that has the data to be received
+     * @return	InputStream of the URL connection started by the url passed to this function
+     * @throws IOException
+     */
     public static InputStream getHttpConnection(String urlString)
             throws IOException {
         InputStream stream = null;
