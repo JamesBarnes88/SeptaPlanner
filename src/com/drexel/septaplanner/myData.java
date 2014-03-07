@@ -14,6 +14,10 @@ import com.google.gson.JsonParser;
 public class myData {
 
 	//http connection using url stream and reading in char by char, might be slow.
+	/** Get Json element from url passed into this method
+	 * @param URL The url to get the json from 
+	 * @return A json element containing the whole json received from the url
+	 */
 	public static JsonElement getJson(String URL) {
 		JsonElement json;
 
