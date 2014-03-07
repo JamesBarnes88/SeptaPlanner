@@ -4,50 +4,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/origin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/item_trips_method_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="from"
-        android:textSize="20sp" />
+        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:id="@+id/train"
+    <LinearLayout
+        android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/origin"
-        android:paddingRight="5dp"
-        android:text="#train"
-        android:textSize="16sp" />
+        android:layout_toRightOf="@id/item_trips_method_image"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/dest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/origin"
-        android:layout_toRightOf="@id/train"
-        android:text="dest"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/item_trips_list_item_source_station"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="From: Chelten Avenue" />
 
-    <TextView
-        android:id="@+id/depart"
+        <TextView
+            android:id="@+id/item_trips_list_item_dest_station"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="To: 30th Street Station" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="depart"
-        android:textSize="20sp" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/arrive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/depart"
-        android:text="arrive"
-        android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Time Left:" />
+
+        <TextView
+            android:id="@+id/item_trips_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="8 min" />
+    </LinearLayout>
 
 </RelativeLayout>

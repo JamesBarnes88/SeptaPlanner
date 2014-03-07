@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MyArrayAdapter extends ArrayAdapter<septaTrain> {
+public class SeptaTrainAdapter extends ArrayAdapter<septaTrain> {
 
 	private Context context;
 	private int resources;
 	String tag="myweatherapp";
 	
-	public MyArrayAdapter(Context context, int resources) {
+	public SeptaTrainAdapter(Context context, int resources) {
 		super(context, resources);
 		this.context = context;
 		this.resources = resources;
@@ -26,11 +26,11 @@ public class MyArrayAdapter extends ArrayAdapter<septaTrain> {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View itemView = inflater.inflate(resources, parent, false);
 		//get views
-		TextView originView = (TextView) itemView.findViewById(R.id.origin);
-		TextView destView = (TextView) itemView.findViewById(R.id.dest);
-		TextView departView = (TextView) itemView.findViewById(R.id.depart);
-		TextView arriveView = (TextView) itemView.findViewById(R.id.arrive);
-		TextView trainView = (TextView) itemView.findViewById(R.id.train);
+		TextView originView = (TextView) itemView.findViewById(R.id.item_trains_origin);
+		TextView destView = (TextView) itemView.findViewById(R.id.item_trains_dest);
+		TextView departView = (TextView) itemView.findViewById(R.id.item_trains_depart);
+		TextView arriveView = (TextView) itemView.findViewById(R.id.item_trains_arrive);
+		TextView trainView = (TextView) itemView.findViewById(R.id.item_trains_train);
 		
 		septaTrain sTrain= super.getItem(position);
 		//init views
