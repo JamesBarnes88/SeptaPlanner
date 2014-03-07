@@ -40,8 +40,12 @@ public class myData {
 		}
 	}
 
-	//http connnection using the way from class
-    // Makes HttpURLConnection and returns InputStream
+	
+    /** returns input stream of this URL connection. This can be used to get files from the specified location
+     * @param urlString url location that has the data to be received
+     * @return	InputStream of the URL connection started by the url passed to this function
+     * @throws IOException
+     */
     public static InputStream getHttpConnection(String urlString)
             throws IOException {
         InputStream stream = null;
