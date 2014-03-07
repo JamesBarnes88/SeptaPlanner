@@ -36,15 +36,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="SeptaActivity" >
+        <activity android:name="com.drexel.septaplanner.SeptaActivity" >
         </activity>
-        <activity android:name="TripActivity" >
+        <activity android:name="com.drexel.septaplanner.TripActivity" >
         </activity>
-        <activity android:name="TripDisplayActivity" >
+        <activity android:name="com.drexel.septaplanner.TripDisplayActivity" >
         </activity>
-        <activity android:name="SavedActivity" >
+        <activity android:name="com.drexel.septaplanner.SavedActivity" >
         </activity>
-        <activity android:name="RecentTripsActivity" >
+        <activity android:name="com.drexel.septaplanner.RecentTripsActivity" >
         </activity>
 
         <!-- this needs to be changed when exported to the release api key(uses the release SHA1 KEY) -->
@@ -54,7 +54,13 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name="MyMapFrag"></activity>
+
+        <activity android:name="com.drexel.septaplanner.MyMapFrag" >
+        </activity>
+        <activity
+            android:name="com.drexel.septaplanner.SeptaRRActivity"
+            android:label="@string/title_activity_septa_rr" >
+        </activity>
     </application>
 
 </manifest>
