@@ -79,7 +79,7 @@ public class TripActivity extends Activity implements LocationListener {
 				min = timePicker.getCurrentMinute();
 				source = spinSource.getSelectedItem().toString();
 				dest = spinDest.getSelectedItem().toString();
-				method = spinTravelMethod.getSelectedItem().toString();
+				method = spinTravelMethod.getSelectedItem().toString().toLowerCase();
 				Location location = getLocationData();
 				Trip trip = new Trip(method, source, dest, hour, min, location
 						.getLongitude(), location.getLatitude(), 1);
