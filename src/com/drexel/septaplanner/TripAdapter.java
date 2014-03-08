@@ -45,12 +45,12 @@ public class TripAdapter extends ArrayAdapter<Trip> {
 		destView.setText(trip.getDestStation());
 		timeLeftView.setText(trip.getTimeLeft());
 		String method = trip.getMethodOfTravel();
-		if (method.equals("walking"))
-			imageView.setImageBitmap(getBitmap("walking.bmp"));
-		if (method.equals("driving"))
-			imageView.setImageBitmap(getBitmap("driving.bmp"));
-		if (method.equals("bicycling"))
-			imageView.setImageBitmap(getBitmap("bicycling.bmp"));
+//		if (method.equals("walking"))
+//			imageView.setImageBitmap(getBitmap("walking.bmp"));
+//		if (method.equals("driving"))
+//			imageView.setImageBitmap(getBitmap("driving.bmp"));
+//		if (method.equals("bicycling"))
+//			imageView.setImageBitmap(getBitmap("bicycling.bmp"));
 
 		return itemView;
 	}
