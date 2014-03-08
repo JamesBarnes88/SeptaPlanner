@@ -26,23 +26,25 @@ public class SeptaActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(SeptaActivity.this, TripActivity.class);
-				startActivity(i);
+				//we need a bus activity to use this
+//				Intent i = new Intent(SeptaActivity.this, TripActivity.class);
+//				startActivity(i);
 			}
 		});
 		buttonTrains.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(SeptaActivity.this, SeptaActivity.class);
-				startActivity(i);
+				//we need a train activity to use this
+//				Intent i = new Intent(SeptaActivity.this, SeptaActivity.class);
+//				startActivity(i);
 			}
 		});
 		buttonRegRail.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(SeptaActivity.this, RecentTripsActivity.class);
+				Intent i = new Intent(SeptaActivity.this, SeptaRRActivity.class);
 				startActivity(i);
 			}
 		});
