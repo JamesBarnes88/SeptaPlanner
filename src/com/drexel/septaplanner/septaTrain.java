@@ -90,7 +90,19 @@ public class septaTrain implements Parcelable {
 	}
 
 
-
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.trainNum);
+		dest.writeString(this.depart);
+		dest.writeString(this.arrive);
+		dest.writeString(this.delay);
+		dest.writeString(this.origin_line);
+		dest.writeString(this.destination);
+		dest.writeDouble(this.latlong.latitude);
+		dest.writeDouble(this.latlong.longitude);
+		
+	}
+	
 	public static final Parcelable.Creator<septaTrain> CREATOR = new Creator<septaTrain>() {
 
 		public septaTrain createFromParcel(Parcel source) {
@@ -111,24 +123,13 @@ public class septaTrain implements Parcelable {
 
 			return new septaTrain[size];
 		}
-	};
 
+	};
+	
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.trainNum);
-		dest.writeString(this.depart);
-		dest.writeString(this.arrive);
-		dest.writeString(this.delay);
-		dest.writeString(this.origin_line);
-		dest.writeString(this.destination);
-		dest.writeDouble(this.latlong.latitude);
-		dest.writeDouble(this.latlong.longitude);
 	}
 
 }

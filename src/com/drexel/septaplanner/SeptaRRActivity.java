@@ -30,9 +30,9 @@ public class SeptaRRActivity extends Activity {
 
 	SeptaTrainAdapter adapter;
 	Context context = this;
-	String tag = "mySeptaViewer";
-	String stationTo;
-	String stationFrom;
+	String tag = "mySeptaPlanner.RR";
+	String stationSource;
+	String stationDest;
 	String[] scheduleResult;
 
 
@@ -47,9 +47,9 @@ public class SeptaRRActivity extends Activity {
 
 		setContentView(R.layout.activity_septa_rr);
 		ListView lv = (ListView) findViewById(R.id.listview);
-		Spinner spinTo = (Spinner) findViewById(R.id.spinner_to);
-		Spinner spinFrom = (Spinner) findViewById(R.id.spinner_from);
-		Button button = (Button) findViewById(R.id.button_go);
+		Spinner spinSource = (Spinner) findViewById(R.id.spinner_rr_source);
+		Spinner spinDest = (Spinner) findViewById(R.id.spinner_rr_destination);
+		Button button = (Button) findViewById(R.id.button_rr_go);
 		mapbutton = (Button) findViewById(R.id.button_map);
 
 		// listview stuff
@@ -64,8 +64,8 @@ public class SeptaRRActivity extends Activity {
 		ArrayAdapter<String> stationAdapter2 = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, stations);
 
-		spinTo.setAdapter(stationAdapter1);
-		spinFrom.setAdapter(stationAdapter2);
+		spinSource.setAdapter(stationAdapter1);
+		spinDest.setAdapter(stationAdapter2);
 		
 		//this may not need to be used in this act
 //		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
@@ -85,12 +85,12 @@ public class SeptaRRActivity extends Activity {
 //		});
 
 		// listeners
-		spinTo.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinSource.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> adapter, View v,
 					int position, long id) {
-				stationTo = (String) adapter.getItemAtPosition(position);
+				stationSource = (String) adapter.getItemAtPosition(position);
 			}
 
 			@Override
@@ -98,12 +98,12 @@ public class SeptaRRActivity extends Activity {
 				// TODO Auto-generated method stub
 			}
 		});
-		spinFrom.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinDest.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> adapter, View v,
 					int position, long id) {
-				stationFrom = (String) adapter.getItemAtPosition(position);
+				stationDest = (String) adapter.getItemAtPosition(position);
 			}
 
 			@Override
@@ -116,10 +116,10 @@ public class SeptaRRActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				if (!stationFrom.equals(stationTo)) {
+				if (!stationDest.equals(stationSource)) {
 					SeptaAsyncTask stask = new SeptaAsyncTask();
-					stask.setStations(stationFrom, stationTo);
-					stask.execute();
+					stask.setStations(stationSource, stationDest);
+					stask.execute(new String[] { stationSource, stationDest});
 				} else
 					Toast.makeText(
 							SeptaRRActivity.this,
@@ -156,7 +156,7 @@ public class SeptaRRActivity extends Activity {
 		return true;
 	}
 
-	public class SeptaAsyncTask extends AsyncTask<Void, Void, Void> {
+	public class SeptaAsyncTask extends AsyncTask<String, Void, Void> {
 		septaTrain[] trains;
 		String stationFrom, stationTo;
 
@@ -173,13 +173,13 @@ public class SeptaRRActivity extends Activity {
 		}
 
 		@Override
-		protected Void doInBackground(Void... arg0) {
+		protected Void doInBackground(String... arg0) {
 			Log.d(tag, "thread started");
 
 			Septa s = new Septa();
 			Log.d(tag, "calling getdata");
 
-			trains = s.getNTA(stationFrom, stationTo);
+			trains = s.getNTA(arg0[0], arg0[1]);
 			System.out.println(trains.toString());
 
 			return null;

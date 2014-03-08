@@ -10,32 +10,32 @@
     tools:context=".MainActivity" >
 
     <Spinner
-        android:id="@+id/spinner_to"
+        android:id="@+id/spinner_rr_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/spin_prompt" />
 
     <Spinner
-        android:id="@+id/spinner_from"
+        android:id="@+id/spinner_rr_destination"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:prompt="@string/spin_prompt" />
 
     <Button
-        android:id="@+id/button_go"
+        android:id="@+id/button_rr_go"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="search for trains" />
-
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/button_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show on map" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
