@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import com.cloudmine.api.CMApiCredentials;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -25,11 +23,10 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class TripActivity extends Activity implements LocationListener {
 
-	//CloudMine APP_KEY and APP_ID
-	private String APP_KEY = "B3A8C30526A8410ABB335D59DD6B679B";
-	private String APP_ID = "a1fd3e9b5488440084885a4205f0af96";
 	// tag for Logcat
 	String tag = "com.drexel.septaplanner.tripActivity";
 
@@ -55,10 +52,6 @@ public class TripActivity extends Activity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trip);
-		
-		//Credentials for CloudMine
-		CMApiCredentials.initialize(APP_ID, APP_KEY,
-				getApplicationContext());
 
 		hour = 0;
 		min = 0;
@@ -88,10 +81,12 @@ public class TripActivity extends Activity implements LocationListener {
 				min = timePicker.getCurrentMinute();
 				source = spinSource.getSelectedItem().toString();
 				dest = spinDest.getSelectedItem().toString();
-				method = spinTravelMethod.getSelectedItem().toString();
+				method = spinTravelMethod.getSelectedItem().toString().toLowerCase();
 				Location location = getLocationData();
-				Trip trip = new Trip(method, source, dest, hour, min, location
-						.getLongitude(), location.getLatitude(), 1);
+				//getdestLocation()
+				
+				//second latlng should be the destination latlng from the 
+				Trip trip = new Trip(method.toLowerCase(), source, dest, hour, min, new LatLng(location.getLongitude(), location.getLatitude()), new LatLng(location.getLongitude(), location.getLatitude()), 1);
 
 				Toast.makeText(TripActivity.this, trip.toString(),
 						Toast.LENGTH_LONG).show();
@@ -105,10 +100,6 @@ public class TripActivity extends Activity implements LocationListener {
 				 * on postExecute you could call the intent, and cancel the
 				 * loading view here.
 				 */
-				
-				/*Save the trip object to cloud mine*/
-				
-
 
 			}
 		});

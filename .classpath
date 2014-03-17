@@ -6,5 +6,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="C:/Users/mike/Documents/JARs/cloudmine-android-v0.5.1/cloudmine-android-v0.5.1/cloudmine-android-v0.5.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mike/Documents/JARs/cloudmine-java-v0.5.1/cloudmine-java-v0.5.1/cloudmine-javasdk-0.5.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
