@@ -81,7 +81,7 @@ public class TripActivity extends Activity implements LocationListener {
 				dest = spinDest.getSelectedItem().toString();
 				method = spinTravelMethod.getSelectedItem().toString().toLowerCase();
 				Location location = getLocationData();
-				Trip trip = new Trip(method, source, dest, hour, min, location
+				Trip trip = new Trip(method.toLowerCase(), source, dest, hour, min, location
 						.getLongitude(), location.getLatitude(), 1);
 
 				Toast.makeText(TripActivity.this, trip.toString(),

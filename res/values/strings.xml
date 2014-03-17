@@ -10,6 +10,7 @@
     <string-array name="array_travel_method">
         <item>Walking</item>
         <item>Driving</item>
+        <item >Bicycling</item>
     </string-array>
     
    <color name="bright_red">#FFB22222</color>
