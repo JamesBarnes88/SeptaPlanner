@@ -1,5 +1,8 @@
 package com.drexel.septaplanner;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * This class is used to keep trip data. A trip is what we will use to query the
  * google directions api and the septa api the directions will be from the
@@ -9,7 +12,7 @@ package com.drexel.septaplanner;
  * @author buckyb
  * 
  */
-public class Trip {
+public class Trip implements Parcelable {
 
 	String methodOfTravel;
 	String sourceStation;
@@ -25,6 +28,10 @@ public class Trip {
 	// should probably change this to an int, but we will deal with it when it
 	// comes
 	String timeLeft = "0:00";
+	
+	public Trip(){
+		//do nothing
+	}
 
 	/**
 	 * @param methodOftravel
@@ -102,6 +109,22 @@ public class Trip {
 		this.longitude = longitude;
 	}
 
+	public int getArrivalHr() {
+		return arrivalHr;
+	}
+
+	public void setArrivalHr(int arrivalHr) {
+		this.arrivalHr = arrivalHr;
+	}
+
+	public int getArrivalMin() {
+		return arrivalMin;
+	}
+
+	public void setArrivalMin(int arrivalMin) {
+		this.arrivalMin = arrivalMin;
+	}
+
 	@Override
 	public String toString() {
 		return "Trip [methodOfTravel=" + methodOfTravel + ", sourceStation="
@@ -109,6 +132,49 @@ public class Trip {
 				+ ", latitude=" + latitude + ", longitude=" + longitude
 				+ ", arrivalHr=" + arrivalHr + ", arrivalMin=" + arrivalMin
 				+ "]";
+	}
+	
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.methodOfTravel);
+		dest.writeString(this.sourceStation);
+		dest.writeString(this.destStation);
+		dest.writeString(this.timeLeft);
+		dest.writeDouble(this.latitude);
+		dest.writeDouble(this.longitude);
+		dest.writeInt(this.arrivalHr);
+		dest.writeInt(this.arrivalMin);		
+	}
+	
+	public static final Parcelable.Creator<Trip> CREATOR = new Creator<Trip>() {
+
+		public Trip createFromParcel(Parcel source) {
+
+			Trip trip = new Trip();
+			trip.setMethodOfTravel(source.readString());
+			trip.setSourceStation(source.readString());
+			trip.setDestStation(source.readString());
+			trip.setTimeLeft(source.readString());
+			trip.setLatitude(source.readDouble());
+			trip.setLongitude(source.readDouble());
+			trip.setArrivalHr(source.readInt());
+			trip.setArrivalMin(source.readInt());
+
+			return trip;
+		}
+
+		public Trip[] newArray(int size) {
+
+			return new Trip[size];
+		}
+
+	};
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
