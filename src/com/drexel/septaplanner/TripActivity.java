@@ -23,6 +23,8 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class TripActivity extends Activity implements LocationListener {
 
 	// tag for Logcat
@@ -81,8 +83,10 @@ public class TripActivity extends Activity implements LocationListener {
 				dest = spinDest.getSelectedItem().toString();
 				method = spinTravelMethod.getSelectedItem().toString().toLowerCase();
 				Location location = getLocationData();
-				Trip trip = new Trip(method.toLowerCase(), source, dest, hour, min, location
-						.getLongitude(), location.getLatitude(), 1);
+				//getdestLocation()
+				
+				//second latlng should be the destination latlng from the 
+				Trip trip = new Trip(method.toLowerCase(), source, dest, hour, min, new LatLng(location.getLongitude(), location.getLatitude()), new LatLng(location.getLongitude(), location.getLatitude()), 1);
 
 				Toast.makeText(TripActivity.this, trip.toString(),
 						Toast.LENGTH_LONG).show();

@@ -1,7 +1,12 @@
 package com.drexel.septaplanner;
 
+import java.util.ArrayList;
+
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.cloudmine.api.CMObject;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * This class is used to keep trip data. A trip is what we will use to query the
@@ -12,15 +17,16 @@ import android.os.Parcelable;
  * @author buckyb
  * 
  */
-public class Trip implements Parcelable {
+public class Trip extends CMObject implements Parcelable{
+	public static final String CLASS_NAME = "Trip";
 
 	String methodOfTravel;
 	String sourceStation;
 	String destStation;
 
 	// the origin when the user is building the trip
-	double latitude;
-	double longitude;
+	LatLng originLocation;
+	LatLng destinationLocation;
 
 	int arrivalHr;
 	int arrivalMin;
@@ -28,9 +34,9 @@ public class Trip implements Parcelable {
 	// should probably change this to an int, but we will deal with it when it
 	// comes
 	String timeLeft = "0:00";
-	
-	public Trip(){
-		//do nothing
+
+	public Trip() {
+		super();
 	}
 
 	/**
@@ -50,15 +56,20 @@ public class Trip implements Parcelable {
 	 */
 	public Trip(String methodOftravel, String sourceStation,
 			String destStation, int arrivalHr, int arrivalMin,
-			double longitude, double latitude, int flag) {
+			LatLng originLocation, LatLng destinLocation, int flag) {
+		this();
 		this.methodOfTravel = methodOftravel;
 		this.sourceStation = sourceStation;
 		this.destStation = destStation;
 		this.arrivalHr = arrivalHr;
 		this.arrivalMin = arrivalMin;
-		this.longitude = longitude;
-		this.latitude = latitude;
+		this.originLocation = originLocation;
+		this.destinationLocation = destinLocation;
 
+	}
+
+	public String getClassName() {
+		return CLASS_NAME;
 	}
 
 	public String getTimeLeft() {
@@ -93,20 +104,20 @@ public class Trip implements Parcelable {
 		this.destStation = destStation;
 	}
 
-	public double getLatitude() {
-		return latitude;
+	public LatLng getOriginLatlng() {
+		return originLocation;
 	}
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public void setOriginLatlng(LatLng originLocation) {
+		this.originLocation = originLocation;
 	}
 
-	public double getLongitude() {
-		return longitude;
+	public LatLng getDestinationLatlng() {
+		return destinationLocation;
 	}
 
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+	public void setDestinationLatlng(LatLng destinationLocation) {
+		this.destinationLocation = destinationLocation;
 	}
 
 	public int getArrivalHr() {
@@ -129,24 +140,49 @@ public class Trip implements Parcelable {
 	public String toString() {
 		return "Trip [methodOfTravel=" + methodOfTravel + ", sourceStation="
 				+ sourceStation + ", destStation=" + destStation
-				+ ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", origindest=" + originLocation.toString()
+				+ ", destinationLocation=" + destinationLocation.toString()
 				+ ", arrivalHr=" + arrivalHr + ", arrivalMin=" + arrivalMin
 				+ "]";
 	}
-	
-	
+
+	public static ArrayList<Trip> getTrips(Trip trip) {
+		ArrayList<Trip> trips = new ArrayList<Trip>();
+		// get trains that arrive before arrival time from trip
+		int hour = trip.getArrivalHr();
+		String time;
+		String navTime = Navigation.getTime(trip.getOriginLatlng(),
+				trip.getDestinationLatlng(), trip.getMethodOfTravel());
+		septaTrain[] trains = null;
+
+		if (hour < 12)
+			time = Integer.toString(trip.getArrivalHr()) + ":"
+					+ Integer.toString(trip.getArrivalMin()) + "AM";
+		else
+			time = Integer.toString(trip.getArrivalHr() - 12) + ":"
+					+ Integer.toString(trip.getArrivalMin()) + "PM";
+
+		// trains[] trains= getTrains(time);
+		for (int i = 0; i < trains.length; i++) {
+			
+		}
+		return trips;
+	}
+
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(this.methodOfTravel);
 		dest.writeString(this.sourceStation);
 		dest.writeString(this.destStation);
 		dest.writeString(this.timeLeft);
-		dest.writeDouble(this.latitude);
-		dest.writeDouble(this.longitude);
+		dest.writeDouble(this.originLocation.longitude);
+		dest.writeDouble(this.originLocation.latitude);
+		dest.writeDouble(this.destinationLocation.longitude);
+		dest.writeDouble(this.destinationLocation.latitude);
 		dest.writeInt(this.arrivalHr);
-		dest.writeInt(this.arrivalMin);		
+		dest.writeInt(this.arrivalMin);
 	}
-	
+
 	public static final Parcelable.Creator<Trip> CREATOR = new Creator<Trip>() {
 
 		public Trip createFromParcel(Parcel source) {
@@ -156,8 +192,8 @@ public class Trip implements Parcelable {
 			trip.setSourceStation(source.readString());
 			trip.setDestStation(source.readString());
 			trip.setTimeLeft(source.readString());
-			trip.setLatitude(source.readDouble());
-			trip.setLongitude(source.readDouble());
+			trip.setOriginLatlng(new LatLng(source.readDouble(), source.readDouble()));
+			trip.setOriginLatlng(new LatLng(source.readDouble(), source.readDouble()));
 			trip.setArrivalHr(source.readInt());
 			trip.setArrivalMin(source.readInt());
 
@@ -170,7 +206,7 @@ public class Trip implements Parcelable {
 		}
 
 	};
-	
+
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
