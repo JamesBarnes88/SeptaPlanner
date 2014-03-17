@@ -18,26 +18,17 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-
+		//Defined Buttons
 		Button buttonTrip = (Button) findViewById(R.id.button_trip);
-		Button buttonSepta = (Button) findViewById(R.id.button_septa);
 		Button buttonRecentTrips = (Button) findViewById(R.id.button_recent);
-		Button buttonSavedTrips = (Button) findViewById(R.id.button_saved);
-
 		
+
+		//Implemented if clicked 
 		buttonTrip.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MainActivity.this, TripActivity.class);
-				startActivity(i);
-			}
-		});
-		buttonSepta.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this, SeptaActivity.class);
 				startActivity(i);
 			}
 		});
@@ -49,20 +40,8 @@ public class MainActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		buttonSavedTrips.setOnClickListener(new OnClickListener() {
+		
 
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this, SavedActivity.class);
-				startActivity(i);
-			}
-		});
-		
-		
-		/*buttonTrip.getBackground().setColorFilter(0xFFB22222,PorterDuff.Mode.MULTIPLY);
-		buttonSavedTrips.getBackground().setColorFilter(0xffff4629,PorterDuff.Mode.MULTIPLY);
-		buttonSepta.getBackground().setColorFilter(0xff0000ff,PorterDuff.Mode.MULTIPLY);
-		buttonRecentTrips.getBackground().setColorFilter(0xff0033FF,PorterDuff.Mode.MULTIPLY);*/
 
 	}
 }

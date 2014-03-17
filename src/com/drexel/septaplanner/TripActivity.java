@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import com.cloudmine.api.CMApiCredentials;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -25,6 +27,9 @@ import android.widget.Toast;
 
 public class TripActivity extends Activity implements LocationListener {
 
+	//CloudMine APP_KEY and APP_ID
+	private String APP_KEY = "B3A8C30526A8410ABB335D59DD6B679B";
+	private String APP_ID = "a1fd3e9b5488440084885a4205f0af96";
 	// tag for Logcat
 	String tag = "com.drexel.septaplanner.tripActivity";
 
@@ -50,6 +55,10 @@ public class TripActivity extends Activity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trip);
+		
+		//Credentials for CloudMine
+		CMApiCredentials.initialize(APP_ID, APP_KEY,
+				getApplicationContext());
 
 		hour = 0;
 		min = 0;
@@ -96,6 +105,10 @@ public class TripActivity extends Activity implements LocationListener {
 				 * on postExecute you could call the intent, and cancel the
 				 * loading view here.
 				 */
+				
+				/*Save the trip object to cloud mine*/
+				
+
 
 			}
 		});
