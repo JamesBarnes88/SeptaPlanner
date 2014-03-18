@@ -91,7 +91,7 @@ public class Train {
 		time1.put("part", (event1.substring(5, 7)));
 
 		Map<String, String> time2 = new HashMap<String, String>();
-
+		System.out.println(event1+":::::::"+ event2);
 		time2.put("hour", (event2.substring(0, 2).replace(" ", "0")));
 		time2.put("min", (event2.substring(3, 5)));
 		time2.put("part", (event2.substring(5, 7)));

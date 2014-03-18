@@ -95,9 +95,15 @@ public class TripActivity extends Activity implements LocationListener {
 				Location location = getLocationData();
 				// getdestLocation()
 				String time = "";
-				if (hour < 12)
-					time = Integer.toString(hour) + ":" + Integer.toString(min)
+				String shour="";
+				if (hour < 12){
+					if(hour==0)
+						shour=Integer.toString(12);
+					else
+						shour="0"+Integer.toString(hour);
+					time = shour + ":" + Integer.toString(min)
 							+ "AM";
+				}
 				else
 					time = Integer.toString(hour - 12) + ":"
 							+ Integer.toString(min) + "PM";

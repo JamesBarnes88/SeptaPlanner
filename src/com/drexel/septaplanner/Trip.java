@@ -151,11 +151,12 @@ public class Trip extends CMObject implements Parcelable {
 		try {
 			trains = Train.getTrips(trip.getSourceStation(), trip.getDestStation(), trip.getArrivalTime());
 			Trip tempTrip = null;
+			System.out.println("trains: "+trains.size());
 			for (int i = 0; i < trains.size(); i++) {
-				tempTrip = new Trip(tempTrip.getMethodOfTravel(),
-						tempTrip.getSourceStation(), tempTrip.getDestStation(),
-						trains.get(i).arriveTime, tempTrip.getOriginLocation(),
-						tempTrip.getDestinationLocation(), 0);
+				tempTrip = new Trip(trip.getMethodOfTravel(),
+						trip.getSourceStation(), trip.getDestStation(),
+						trains.get(i).arriveTime, trip.getOriginLocation(),
+						trip.getDestinationLocation(), 0);
 				tempTrip.setTimeLeft(navTime);
 				
 				trips.add(tempTrip);

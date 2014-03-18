@@ -61,6 +61,7 @@ public class TripDisplayActivity extends Activity {
 		@Override
 		protected Void doInBackground(Trip... arg0) {
 			trips=Trip.getTrips(trip);
+			System.out.println(trips.size());
 
 			return null;
 			
