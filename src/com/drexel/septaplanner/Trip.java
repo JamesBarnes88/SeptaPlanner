@@ -2,11 +2,14 @@ package com.drexel.septaplanner;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.cloudmine.api.CMObject;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.JsonArray;
 
 /**
  * This class is used to keep trip data. A trip is what we will use to query the
@@ -17,7 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
  * @author buckyb
  * 
  */
-public class Trip extends CMObject implements Parcelable{
+public class Trip extends CMObject implements Parcelable {
 	public static final String CLASS_NAME = "Trip";
 
 	String methodOfTravel;
@@ -28,8 +31,7 @@ public class Trip extends CMObject implements Parcelable{
 	LatLng originLocation;
 	LatLng destinationLocation;
 
-	int arrivalHr;
-	int arrivalMin;
+	String arrivalTime;
 
 	// should probably change this to an int, but we will deal with it when it
 	// comes
@@ -55,14 +57,13 @@ public class Trip extends CMObject implements Parcelable{
 	 *            regular
 	 */
 	public Trip(String methodOftravel, String sourceStation,
-			String destStation, int arrivalHr, int arrivalMin,
-			LatLng originLocation, LatLng destinLocation, int flag) {
+			String destStation, String arrivalTime, LatLng originLocation,
+			LatLng destinLocation, int flag) {
 		this();
 		this.methodOfTravel = methodOftravel;
 		this.sourceStation = sourceStation;
 		this.destStation = destStation;
-		this.arrivalHr = arrivalHr;
-		this.arrivalMin = arrivalMin;
+		this.arrivalTime = arrivalTime;
 		this.originLocation = originLocation;
 		this.destinationLocation = destinLocation;
 
@@ -120,20 +121,12 @@ public class Trip extends CMObject implements Parcelable{
 		this.destinationLocation = destinationLocation;
 	}
 
-	public int getArrivalHr() {
-		return arrivalHr;
+	public String getArrivalTime() {
+		return arrivalTime;
 	}
 
-	public void setArrivalHr(int arrivalHr) {
-		this.arrivalHr = arrivalHr;
-	}
-
-	public int getArrivalMin() {
-		return arrivalMin;
-	}
-
-	public void setArrivalMin(int arrivalMin) {
-		this.arrivalMin = arrivalMin;
+	public void setArrivalTime(String arrivalTime) {
+		this.arrivalTime = arrivalTime;
 	}
 
 	@Override
@@ -142,30 +135,38 @@ public class Trip extends CMObject implements Parcelable{
 				+ sourceStation + ", destStation=" + destStation
 				+ ", origindest=" + originLocation.toString()
 				+ ", destinationLocation=" + destinationLocation.toString()
-				+ ", arrivalHr=" + arrivalHr + ", arrivalMin=" + arrivalMin
-				+ "]";
+				+ ", arrivalTime=" + arrivalTime + "]";
 	}
 
+	
+	/** can only be called from asyncTask
+	 * @param trip
+	 * @return
+	 */
 	public static ArrayList<Trip> getTrips(Trip trip) {
 		ArrayList<Trip> trips = new ArrayList<Trip>();
 		// get trains that arrive before arrival time from trip
-		int hour = trip.getArrivalHr();
-		String time;
 		String navTime = Navigation.getTime(trip.getOriginLatlng(),
 				trip.getDestinationLatlng(), trip.getMethodOfTravel());
-		septaTrain[] trains = null;
-
-		if (hour < 12)
-			time = Integer.toString(trip.getArrivalHr()) + ":"
-					+ Integer.toString(trip.getArrivalMin()) + "AM";
-		else
-			time = Integer.toString(trip.getArrivalHr() - 12) + ":"
-					+ Integer.toString(trip.getArrivalMin()) + "PM";
-
-		// trains[] trains= getTrains(time);
-		for (int i = 0; i < trains.length; i++) {
-			
+		ArrayList<Train> trains;
+		try {
+			trains = Train.getTrips(trip.getSourceStation(), trip.getDestStation(), trip.getArrivalTime());
+			Trip tempTrip = null;
+			for (int i = 0; i < trains.size(); i++) {
+				tempTrip = new Trip(tempTrip.getMethodOfTravel(),
+						tempTrip.getSourceStation(), tempTrip.getDestStation(),
+						trains.get(i).arriveTime, tempTrip.getOriginLatlng(),
+						tempTrip.getDestinationLatlng(), 0);
+				tempTrip.setTimeLeft(navTime);
+				
+				trips.add(tempTrip);
+				System.out.println(tempTrip.toString());
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 		return trips;
 	}
 
@@ -179,8 +180,7 @@ public class Trip extends CMObject implements Parcelable{
 		dest.writeDouble(this.originLocation.latitude);
 		dest.writeDouble(this.destinationLocation.longitude);
 		dest.writeDouble(this.destinationLocation.latitude);
-		dest.writeInt(this.arrivalHr);
-		dest.writeInt(this.arrivalMin);
+		dest.writeString(this.arrivalTime);
 	}
 
 	public static final Parcelable.Creator<Trip> CREATOR = new Creator<Trip>() {
@@ -192,10 +192,11 @@ public class Trip extends CMObject implements Parcelable{
 			trip.setSourceStation(source.readString());
 			trip.setDestStation(source.readString());
 			trip.setTimeLeft(source.readString());
-			trip.setOriginLatlng(new LatLng(source.readDouble(), source.readDouble()));
-			trip.setOriginLatlng(new LatLng(source.readDouble(), source.readDouble()));
-			trip.setArrivalHr(source.readInt());
-			trip.setArrivalMin(source.readInt());
+			trip.setOriginLatlng(new LatLng(source.readDouble(), source
+					.readDouble()));
+			trip.setOriginLatlng(new LatLng(source.readDouble(), source
+					.readDouble()));
+			trip.setArrivalTime(source.readString());
 
 			return trip;
 		}

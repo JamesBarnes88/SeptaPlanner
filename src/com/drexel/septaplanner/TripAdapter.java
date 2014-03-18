@@ -43,8 +43,8 @@ public class TripAdapter extends ArrayAdapter<Trip> {
 
 		sourceView.setText(trip.getSourceStation());
 		destView.setText(trip.getDestStation());
-		timeLeftView.setText(trip.getTimeLeft());
-		String method = trip.getMethodOfTravel();
+		timeLeftView.setText(trip.getTimeLeft());      //this needs to be changed to depart time - navtime- current time 
+//		String method = trip.getMethodOfTravel();
 //		if (method.equals("walking"))
 //			imageView.setImageBitmap(getBitmap("walking.bmp"));
 //		if (method.equals("driving"))

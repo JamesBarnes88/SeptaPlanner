@@ -22,6 +22,17 @@ public class Septa {
 
 		return parseNTA(json, trainviewjson, stationTo);
 	}
+	public static JsonElement getJson(String stationFrom, String stationTo) {
+		String URL = "http://www3.septa.org/hackathon/NextToArrive/"
+				+ myData.encodeUrl(stationFrom) + "/"
+				+ myData.encodeUrl(stationTo) + "/200";
+		String trainviewurl = "http://www3.septa.org/hackathon/TrainView/";
+
+		JsonElement json = myData.getJson(URL);
+		JsonElement trainviewjson = myData.getJson(trainviewurl);
+
+		return json;
+	}
 
 	public String[] getTrainSchedule(String train) {
 		String URL = "http://www3.septa.org/hackathon/RRSchedules/" + train;

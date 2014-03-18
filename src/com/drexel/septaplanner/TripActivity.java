@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -84,12 +85,23 @@ public class TripActivity extends Activity implements LocationListener {
 				method = spinTravelMethod.getSelectedItem().toString().toLowerCase();
 				Location location = getLocationData();
 				//getdestLocation()
+				String time="";
+				if (hour<12)
+					time= Integer.toString(hour)+":"+Integer.toString(min)+"AM";
+				else
+					time= Integer.toString(hour-12)+":"+Integer.toString(min)+"PM";
+
 				
-				//second latlng should be the destination latlng from the 
-				Trip trip = new Trip(method.toLowerCase(), source, dest, hour, min, new LatLng(location.getLongitude(), location.getLatitude()), new LatLng(location.getLongitude(), location.getLatitude()), 1);
+				
+				//second latlng should be the destination latlng from the csv
+				Trip trip = new Trip(method.toLowerCase(), source, dest, time, new LatLng(location.getLongitude(), location.getLatitude()), new LatLng(location.getLongitude(), location.getLatitude()), 1);
 
 				Toast.makeText(TripActivity.this, trip.toString(),
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_LONG).show();	
+				
+				Intent i= new Intent();
+				i.putExtra("trip", trip);
+				startActivity(i);
 
 				/*
 				 * put code to fetch data here, display loading icon while it is

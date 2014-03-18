@@ -25,15 +25,14 @@ public class TripDisplayActivity extends Activity {
 		tripAdapter.setNotifyOnChange(true);
 		l.setAdapter(tripAdapter);
 
-		Intent i = getIntent();
-		int flag = i.getIntExtra("flag", 0);
+		Intent i = getIntent();		
 
 		trip = i.getParcelableExtra("trip");
 		
-
-	}
-	public void getTrips(){
+		TripAsyncTask tripTask= new TripAsyncTask();
+		tripTask.execute(trip);
 		
+
 	}
 	
 	@Override
@@ -43,32 +42,27 @@ public class TripDisplayActivity extends Activity {
 		return true;
 	}
 
-	public class SeptaAsyncTask extends AsyncTask<String, Void, Void> {
-		Trip[] trips;
+	public class TripAsyncTask extends AsyncTask<Trip, Void, Void> {
+		ArrayList<Trip> trips;
 		
-		public SeptaAsyncTask() {
+		public TripAsyncTask() {
 			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		protected void onPostExecute(Void arg0) {
 			tripAdapter.clear();
-			for (int i = 0; i < trips.length; i++) {
-				tripAdapter.add(trips[i]);
+			for (int i = 0; i < trips.size(); i++) {
+				tripAdapter.add(trips.get(i));
 			}
 		}
 
 		@Override
-		protected Void doInBackground(String... arg0) {
-			Log.d(tag, "thread started");
-
-			Septa s = new Septa();
-			Log.d(tag, "calling getdata");
-
-			trips = s.getNTA(arg0[0], arg0[1]);
-			System.out.println(trips.toString());
+		protected Void doInBackground(Trip... arg0) {
+			trips=Trip.getTrips(trip);
 
 			return null;
+			
 		}
 	}
 

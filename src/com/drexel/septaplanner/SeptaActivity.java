@@ -49,10 +49,6 @@ public class SeptaActivity extends Activity {
 			}
 		});
 		
-		/*Set buttons Colors
-		buttonBuses.getBackground().setColorFilter(0xFFB22222,PorterDuff.Mode.MULTIPLY);
-		buttonTrains.getBackground().setColorFilter(0xffff4629,PorterDuff.Mode.MULTIPLY);
-		buttonRegRail.getBackground().setColorFilter(0xff0000ff,PorterDuff.Mode.MULTIPLY);*/
 	}
 
 	@Override
