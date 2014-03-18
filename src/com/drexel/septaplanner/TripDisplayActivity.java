@@ -25,13 +25,13 @@ public class TripDisplayActivity extends Activity {
 		tripAdapter.setNotifyOnChange(true);
 		l.setAdapter(tripAdapter);
 
-		Intent i = getIntent();		
+		Intent i = getIntent();
+		System.out.println(i.hasExtra("trip"));
 
 		trip = i.getParcelableExtra("trip");
 		
 		TripAsyncTask tripTask= new TripAsyncTask();
 		tripTask.execute(trip);
-		
 
 	}
 	
@@ -52,6 +52,7 @@ public class TripDisplayActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void arg0) {
 			tripAdapter.clear();
+			System.out.println(trips.size());
 			for (int i = 0; i < trips.size(); i++) {
 				tripAdapter.add(trips.get(i));
 			}

@@ -24,9 +24,14 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.cloudmine.api.CMApiCredentials;
 import com.google.android.gms.maps.model.LatLng;
 
 public class TripActivity extends Activity implements LocationListener {
+
+	// Cloudmine APP_KEY and ID
+	private static String APP_ID = "a1fd3e9b5488440084885a4205f0af96";
+	private static String APP_KEY = "e03802a295e54275b2d054789c232951";
 
 	// tag for Logcat
 	String tag = "com.drexel.septaplanner.tripActivity";
@@ -36,9 +41,9 @@ public class TripActivity extends Activity implements LocationListener {
 	private int min = 0;
 	private String source;
 	private String dest;
-	private String method;	//method of travel
-	
-	//views
+	private String method; // method of travel
+
+	// views
 	private Spinner spinSource;
 	private Spinner spinDest;
 	private Spinner spinTravelMethod;
@@ -53,6 +58,9 @@ public class TripActivity extends Activity implements LocationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trip);
+
+		// Credentials for Cloudmine
+		CMApiCredentials.initialize(APP_ID, APP_KEY, getApplicationContext());
 
 		hour = 0;
 		min = 0;
@@ -82,26 +90,36 @@ public class TripActivity extends Activity implements LocationListener {
 				min = timePicker.getCurrentMinute();
 				source = spinSource.getSelectedItem().toString();
 				dest = spinDest.getSelectedItem().toString();
-				method = spinTravelMethod.getSelectedItem().toString().toLowerCase();
+				method = spinTravelMethod.getSelectedItem().toString()
+						.toLowerCase();
 				Location location = getLocationData();
-				//getdestLocation()
-				String time="";
-				if (hour<12)
-					time= Integer.toString(hour)+":"+Integer.toString(min)+"AM";
+				// getdestLocation()
+				String time = "";
+				if (hour < 12)
+					time = Integer.toString(hour) + ":" + Integer.toString(min)
+							+ "AM";
 				else
-					time= Integer.toString(hour-12)+":"+Integer.toString(min)+"PM";
+					time = Integer.toString(hour - 12) + ":"
+							+ Integer.toString(min) + "PM";
 
-				
-				
-				//second latlng should be the destination latlng from the csv
-				Trip trip = new Trip(method.toLowerCase(), source, dest, time, new LatLng(location.getLongitude(), location.getLatitude()), new LatLng(location.getLongitude(), location.getLatitude()), 1);
+				// second latlng should be the destination latlng from the csv
+				Trip trip = new Trip(method.toLowerCase(), source, dest, time,
+						new LatLng(location.getLatitude(), location
+								.getLongitude()), new LatLng(40.0295,
+								-75.181375), 1);
 
 				Toast.makeText(TripActivity.this, trip.toString(),
-						Toast.LENGTH_LONG).show();	
+						Toast.LENGTH_LONG).show();
 				
-				Intent i= new Intent();
+                //Save cloudmine object
+                trip.save();
+
+				Intent i = new Intent(TripActivity.this,
+						TripDisplayActivity.class);
 				i.putExtra("trip", trip);
 				startActivity(i);
+				
+				
 
 				/*
 				 * put code to fetch data here, display loading icon while it is

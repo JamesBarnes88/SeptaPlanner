@@ -23,7 +23,6 @@ public class Navigation {
 		JsonObject json= jsonE.getAsJsonObject();
 		JsonArray jsonarray=json.get("routes").getAsJsonArray();
 		json= jsonarray.get(0).getAsJsonObject();
-		System.out.println(json.toString());
 		jsonarray= json.get("legs").getAsJsonArray();
 		
 		double time=0;
@@ -37,6 +36,7 @@ public class Navigation {
 			if (time< minTime)
 				minTime=time;
 		}
+		System.out.println("minTime= "+minTime);
 		return minTime;
 	}
 	

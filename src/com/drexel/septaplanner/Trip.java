@@ -9,7 +9,6 @@ import android.os.Parcelable;
 
 import com.cloudmine.api.CMObject;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.gson.JsonArray;
 
 /**
  * This class is used to keep trip data. A trip is what we will use to query the
@@ -105,19 +104,19 @@ public class Trip extends CMObject implements Parcelable {
 		this.destStation = destStation;
 	}
 
-	public LatLng getOriginLatlng() {
+	public LatLng getOriginLocation() {
 		return originLocation;
 	}
 
-	public void setOriginLatlng(LatLng originLocation) {
+	public void setOriginLocation(LatLng originLocation) {
 		this.originLocation = originLocation;
 	}
 
-	public LatLng getDestinationLatlng() {
+	public LatLng getDestinationLocation() {
 		return destinationLocation;
 	}
 
-	public void setDestinationLatlng(LatLng destinationLocation) {
+	public void setDestinationLocation(LatLng destinationLocation) {
 		this.destinationLocation = destinationLocation;
 	}
 
@@ -146,8 +145,8 @@ public class Trip extends CMObject implements Parcelable {
 	public static ArrayList<Trip> getTrips(Trip trip) {
 		ArrayList<Trip> trips = new ArrayList<Trip>();
 		// get trains that arrive before arrival time from trip
-		String navTime = Navigation.getTime(trip.getOriginLatlng(),
-				trip.getDestinationLatlng(), trip.getMethodOfTravel());
+		String navTime = Navigation.getTime(trip.getOriginLocation(),
+				trip.getDestinationLocation(), trip.getMethodOfTravel());
 		ArrayList<Train> trains;
 		try {
 			trains = Train.getTrips(trip.getSourceStation(), trip.getDestStation(), trip.getArrivalTime());
@@ -155,8 +154,8 @@ public class Trip extends CMObject implements Parcelable {
 			for (int i = 0; i < trains.size(); i++) {
 				tempTrip = new Trip(tempTrip.getMethodOfTravel(),
 						tempTrip.getSourceStation(), tempTrip.getDestStation(),
-						trains.get(i).arriveTime, tempTrip.getOriginLatlng(),
-						tempTrip.getDestinationLatlng(), 0);
+						trains.get(i).arriveTime, tempTrip.getOriginLocation(),
+						tempTrip.getDestinationLocation(), 0);
 				tempTrip.setTimeLeft(navTime);
 				
 				trips.add(tempTrip);
@@ -192,9 +191,9 @@ public class Trip extends CMObject implements Parcelable {
 			trip.setSourceStation(source.readString());
 			trip.setDestStation(source.readString());
 			trip.setTimeLeft(source.readString());
-			trip.setOriginLatlng(new LatLng(source.readDouble(), source
+			trip.setOriginLocation(new LatLng(source.readDouble(), source
 					.readDouble()));
-			trip.setOriginLatlng(new LatLng(source.readDouble(), source
+			trip.setDestinationLocation(new LatLng(source.readDouble(), source
 					.readDouble()));
 			trip.setArrivalTime(source.readString());
 
